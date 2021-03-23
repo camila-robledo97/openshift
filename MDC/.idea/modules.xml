@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/calculadora-spring-boot.iml" filepath="$PROJECT_DIR$/calculadora-spring-boot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modulo-consultas.iml" filepath="$PROJECT_DIR$/modulo-consultas.iml" />
     </modules>
   </component>
 </project>
