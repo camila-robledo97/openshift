@@ -1,7 +1,5 @@
 package com.example.demo2.commons;
 
-
-
 public class Constants {
     private Constants() {
         throw new IllegalStateException("Utility class");

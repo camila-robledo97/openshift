@@ -1,4 +1,4 @@
-package com.example.demo2.service;
+package com.example.prueba3.service;
 
 import co.com.invima.onlineprocedure.canonicalmodel.dto.generic.GenericRequestDTO;
 import co.com.invima.onlineprocedure.canonicalmodel.dto.generic.GenericResponseDTO;
@@ -8,10 +8,10 @@ import co.com.invima.onlineprocedure.canonicalmodel.dto.query.QueryReportDTO;
 import co.com.invima.onlineprocedure.canonicalmodel.dto.query.TestVisitDTO;
 import co.com.invima.onlineprocedure.canonicalmodel.dto.visit.VisitDTO;
 import co.com.invima.onlineprocedure.canonicalmodel.entities.query.QueryReportDAO;
-import co.com.invima.onlineprocedure.canonicalmodel.entities.query.TestVisitDAO;
-import com.example.demo2.commons.converter.QueryConverter;
-import com.example.demo2.repository.IQueryRepository;
+import com.example.prueba3.commons.converter.QueryConverter;
+import com.example.prueba3.repository.IQueryRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,20 +20,30 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-
 @Service
 public class QueryService implements IQueryService {
 
-    private final QueryConverter converter;
     ObjectMapper objectMapper = new ObjectMapper();
-
+    private final QueryConverter converter;
     private final IQueryRepository queryRepository;
 
+    @Autowired
     public QueryService(QueryConverter converter, IQueryRepository queryRepository) {
         this.converter = converter;
         this.queryRepository = queryRepository;
     }
 
+    @Override
+    public ResponseEntity <GenericResponseDTO> findAll() {
+        List <QueryReportDAO> queryReportDAOList = queryRepository.findAll();
+        List <QueryReportDTO> queryReportDTOList = converter.queryReportDTOToQueryReportDAOList(queryReportDAOList);
+
+        return new ResponseEntity <>(GenericResponseDTO.builder()
+                .statusCode(HttpStatus.OK.value())
+                .objectResponse(queryReportDTOList)
+                .message("SUCCESS")
+                .build(), HttpStatus.OK);
+    }
 
     @Override
     public ResponseEntity <GenericResponseDTO> findStoredProcedure(String code, GenericRequestDTO genericRequestDTO,
@@ -84,31 +94,4 @@ public class QueryService implements IQueryService {
                 .objectResponse(Respuesta)
                 .build(), HttpStatus.OK);
     }
-
-    @Override
-    public ResponseEntity <GenericResponseDTO> findAll() {
-        List <QueryReportDAO> queryReportDAOList = queryRepository.findAll();
-        List <QueryReportDTO> queryReportDTOList = converter.queryReportDTOToQueryReportDAOList(queryReportDAOList);
-
-        return new ResponseEntity <>(GenericResponseDTO.builder()
-                .statusCode(HttpStatus.OK.value())
-                .objectResponse(queryReportDTOList)
-                .message("SUCCESS")
-                .build(), HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity <GenericResponseDTO> findAllVisit() {
-        List <TestVisitDAO> queryReportDAOList = queryRepository.findTestVisit();
-        List <TestVisitDTO> queryReportDTOList = converter.queryTestVisitDTOToTestVisitDAOList2(queryReportDAOList);
-
-
-        return new ResponseEntity <>(GenericResponseDTO.builder()
-                .statusCode(HttpStatus.OK.value())
-                .objectResponse(queryReportDTOList)
-                .message("SUCCESS")
-                .build(), HttpStatus.OK);
-    }
-
-
 }

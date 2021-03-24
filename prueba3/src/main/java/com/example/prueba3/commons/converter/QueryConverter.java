@@ -1,4 +1,5 @@
-package com.example.demo2.commons.converter;
+package com.example.prueba3.commons.converter;
+
 
 import co.com.invima.onlineprocedure.canonicalmodel.dto.parameter.ParameterDTO;
 import co.com.invima.onlineprocedure.canonicalmodel.dto.query.QueryReportDTO;
@@ -13,7 +14,6 @@ import java.util.List;
 
 @Component
 public class QueryConverter {
-
     public ParameterDTO queryStoredProcedureToParameterDTO (Object[] objects){
         return ParameterDTO.builder()
                 .id((Integer) objects[0])
