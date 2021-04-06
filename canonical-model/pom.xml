@@ -3,17 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>co.com.invima.procedureonline.canonicalmodel</groupId>
-    <artifactId>canonical-model</artifactId>
+
+        <groupId>co.com.invima.procedureonline.canonicalmodel</groupId>
+        <artifactId>canonical-model</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>canonical-model</name>
-    <description>Canonical model of project</description>
-    <repositories>
-        <repository>
-            <id>maven-group</id>
-            <url>http://192.168.1.224:8081/repository/maven-public/</url>
-        </repository>
-    </repositories>
+
+
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -79,14 +74,16 @@
         </dependency>
     </dependencies>
     <distributionManagement>
+        <repository>
+            <id>nexus-snapshots</id>
+            <name>maven-relases-sivicos</name>
+            <url>http://192.168.1.224:8081/repository/maven-relases-sivicos/</url>
+        </repository>
         <snapshotRepository>
             <id>nexus-snapshots</id>
-            <url>http://192.168.1.224:8081/repository/maven-snapshots/</url>
+            <name>maven-snapshots-sivicos</name>
+            <url>http://192.168.1.224:8081/repository/maven-snapshots-sivicos/</url>
         </snapshotRepository>
-        <repository>
-            <id>nexus-releases</id>
-            <url>http://192.168.1.224:8081/repository/maven-releases/</url>
-        </repository>
     </distributionManagement>
 
 </project>
