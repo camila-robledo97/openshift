@@ -65,8 +65,7 @@ public class QueryService implements IQueryService {
 
 
 
-        List <Object[]> objects =  queryRepository.proc_parameter_code(queryReportDTO.getStoredProcedure(), converJson,
-                pageSize,page,orderBy,order);
+        List <Object[]> objects =  queryRepository.proc_parameter_code(queryReportDTO.getStoredProcedure(), converJson,pageSize,page,orderBy,order);
         if (objects == null) {
             return new ResponseEntity<>(GenericResponseDTO.builder()
                     .statusCode(HttpStatus.CONFLICT.value())

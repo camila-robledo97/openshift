@@ -22,7 +22,7 @@ public class QueryController implements IQueryController{
     }
 
     @Override
-    @GetMapping("/byStoredCode/{code}")
+    @PostMapping("/byStoredCode/{code}")
     public ResponseEntity <GenericResponseDTO> find_stored_procedure(@PathVariable("code") String code,
                                                                      @Valid @RequestBody GenericRequestDTO genericRequestDTO,
                                                                      @RequestParam int pageSize,
