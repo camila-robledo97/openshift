@@ -17,4 +17,18 @@ public interface IQueryRepository extends JpaRepository <QueryReportDAO, Integer
     @Query ("select stored from QueryReportDAO stored where stored.codequery=:code")
     QueryReportDAO find_stored_procedure(String code);
 
+    @Query(value ="SELECT * FROM :#{#tableName}", nativeQuery = true)
+    String count_table(String tableName);
+
+
+    @Query("select count (parameter) FROM ParameterDAO parameter")
+    Integer count_parameter();
+
+    @Query("select count (visit) FROM VisitDAO visit")
+    Integer count_visit();
+
+    @Query("select count (testVisit) FROM TestVisitDAO testVisit")
+    Integer count_testVisit();
+
+
 }

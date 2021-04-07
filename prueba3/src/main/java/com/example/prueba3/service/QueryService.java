@@ -7,7 +7,9 @@ import co.com.invima.onlineprocedure.canonicalmodel.dto.query.InputDTO;
 import co.com.invima.onlineprocedure.canonicalmodel.dto.query.QueryReportDTO;
 import co.com.invima.onlineprocedure.canonicalmodel.dto.query.TestVisitDTO;
 import co.com.invima.onlineprocedure.canonicalmodel.dto.visit.VisitDTO;
+import co.com.invima.onlineprocedure.canonicalmodel.entities.parameters.ParameterDAO;
 import co.com.invima.onlineprocedure.canonicalmodel.entities.query.QueryReportDAO;
+import co.com.invima.onlineprocedure.canonicalmodel.entities.visit.VisitDAO;
 import com.example.prueba3.commons.converter.QueryConverter;
 import com.example.prueba3.repository.IQueryRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +29,8 @@ public class QueryService implements IQueryService {
     private final QueryConverter converter;
     private final IQueryRepository queryRepository;
 
+
+
     @Autowired
     public QueryService(QueryConverter converter, IQueryRepository queryRepository) {
         this.converter = converter;
@@ -36,6 +40,7 @@ public class QueryService implements IQueryService {
     @Override
     public ResponseEntity <GenericResponseDTO> findAll() {
         List <QueryReportDAO> queryReportDAOList = queryRepository.findAll();
+
         List <QueryReportDTO> queryReportDTOList = converter.queryReportDTOToQueryReportDAOList(queryReportDAOList);
 
         return new ResponseEntity <>(GenericResponseDTO.builder()
@@ -57,13 +62,7 @@ public class QueryService implements IQueryService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (page == 0 ){
-            page =1;
 
-        }
-        if (pageSize == 0 ){
-            pageSize =50;
-        }
 
 
         List <Object[]> objects =  queryRepository.proc_parameter_code(queryReportDTO.getStoredProcedure(), converJson,
@@ -74,24 +73,30 @@ public class QueryService implements IQueryService {
                     .message("not found none attribute for your search")
                     .build(), HttpStatus.OK);
         }
+        Integer count = null;
         List <Object> Respuesta = null;
         switch (code) {
             case "proc01":
                 List <ParameterDTO> parameterDTO1 = converter.queryStoredProcedureToParameterDTOList(objects);
                 Respuesta = Collections.singletonList(parameterDTO1);
+              count = queryRepository.count_parameter();
+
                 break;
             case "proc02":
                 List <VisitDTO> visitDTO = converter.queryStoredProcedureToVisitDTOList(objects);
                 Respuesta = Collections.singletonList(visitDTO);
+                count = queryRepository.count_visit();
                 break;
             case "proc03":
                 List <TestVisitDTO> testVisitDTO = converter.queryTestVisitDTOToTestVisitDAOList(objects);
                 Respuesta = Collections.singletonList(testVisitDTO);
+                count = queryRepository.count_testVisit();
                 break;
         }
         return new ResponseEntity <>(GenericResponseDTO.builder()
                 .statusCode(HttpStatus.OK.value())
                 .objectResponse(Respuesta)
+                .message("total atributos: "+count)
                 .build(), HttpStatus.OK);
     }
 }
