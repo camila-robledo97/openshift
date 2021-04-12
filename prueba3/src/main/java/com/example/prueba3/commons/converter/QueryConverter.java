@@ -16,11 +16,11 @@ import java.util.List;
 public class QueryConverter {
     public ParameterDTO queryStoredProcedureToParameterDTO (Object[] objects){
         return ParameterDTO.builder()
-                .id((Integer) objects[0])
-                .code((String) objects[1])
-                .description((String) objects[2])
-                .name((String) objects[4])
-                .parent(String.valueOf((Integer)objects[5]))
+                .id((Integer) objects[1])
+                .code((String) objects[2])
+                .description((String) objects[3])
+                .name((String) objects[5])
+                .parent(String.valueOf((Integer)objects[6]))
                 .build();
     }
 
@@ -33,26 +33,28 @@ public class QueryConverter {
     }
 
     public VisitDTO queryStoredProcedureToVisitDTO (Object[] objects){
+
         return VisitDTO.builder()
-                .id((Integer) objects[0])
-                .code((String) objects[1])
+
+                .id((Integer) objects[1])
+                .code((String) objects[2])
                 .city( ParameterDTO.builder()
-                        .code(String.valueOf((Integer)objects[3]))
-                        .build())
-                .country( ParameterDTO.builder()
                         .code(String.valueOf((Integer)objects[4]))
                         .build())
-                .department( ParameterDTO.builder()
+                .country( ParameterDTO.builder()
                         .code(String.valueOf((Integer)objects[5]))
                         .build())
-                .estado( ParameterDTO.builder()
+                .department( ParameterDTO.builder()
                         .code(String.valueOf((Integer)objects[6]))
                         .build())
-                .prioridad( ParameterDTO.builder()
+                .estado( ParameterDTO.builder()
                         .code(String.valueOf((Integer)objects[7]))
                         .build())
-                .typeVisit( ParameterDTO.builder()
+                .prioridad( ParameterDTO.builder()
                         .code(String.valueOf((Integer)objects[8]))
+                        .build())
+                .typeVisit( ParameterDTO.builder()
+                        .code(String.valueOf((Integer)objects[9]))
                         .build())
                 .build();
     }
@@ -85,16 +87,19 @@ public class QueryConverter {
 
 
     public TestVisitDTO testVisitDTOToTestVisitDAO (Object[] objects){
+        Integer count = (Integer) objects[0];
         return TestVisitDTO.builder()
-                .code((String) objects[2])
-                .direction(String.valueOf(objects[4]))
-                .city((String) objects[1])
-                .country((String) objects[3])
-                .establishmentName((String) objects[5])
-                .inspector((String) objects[6])
-                .productVisit(String.valueOf(objects[7]))
+
+                .code((String) objects[3])
+                .direction(String.valueOf(objects[5]))
+                .city((String) objects[2])
+                .country((String) objects[4])
+                .establishmentName((String) objects[6])
+                .inspector((String) objects[7])
+                .productVisit(String.valueOf(objects[8]))
 
                 .build();
+
     }
 
 

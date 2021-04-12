@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -78,24 +79,33 @@ public class QueryService implements IQueryService {
             case "proc01":
                 List <ParameterDTO> parameterDTO1 = converter.queryStoredProcedureToParameterDTOList(objects);
                 Respuesta = Collections.singletonList(parameterDTO1);
-              count = queryRepository.count_parameter();
+             //   count = objects.get(0);
 
                 break;
             case "proc02":
                 List <VisitDTO> visitDTO = converter.queryStoredProcedureToVisitDTOList(objects);
                 Respuesta = Collections.singletonList(visitDTO);
-                count = queryRepository.count_visit();
+                //count = objects[0].get(0);
                 break;
             case "proc03":
                 List <TestVisitDTO> testVisitDTO = converter.queryTestVisitDTOToTestVisitDAOList(objects);
                 Respuesta = Collections.singletonList(testVisitDTO);
-                count = queryRepository.count_testVisit();
+                while (count == null){
+                    for(Object[] object: objects){
+                        count = (Integer) object[0];
+
+                            break;
+
+                    }
+
+                }
+
                 break;
         }
         return new ResponseEntity <>(GenericResponseDTO.builder()
                 .statusCode(HttpStatus.OK.value())
                 .objectResponse(Respuesta)
-                .message("total atributos: "+count)
+                .message("total atributos: "+count.toString())
                 .build(), HttpStatus.OK);
     }
 }
