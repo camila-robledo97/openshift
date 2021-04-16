@@ -30,7 +30,7 @@ public class GVisitDAO  implements Serializable {
     private Integer id;
 
     @Column(name = "code")
-    private Integer code;
+    private String code;
 
     @Column(name = "prioridad")
     private String prioridad;

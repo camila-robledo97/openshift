@@ -90,7 +90,7 @@ public class QueryConverter {
         Integer count = (Integer) objects[0];
         return TestVisitDTO.builder()
 
-                .code((String) objects[3])
+                .code(String.valueOf(objects[3]))
                 .direction(String.valueOf(objects[5]))
                 .city((String) objects[2])
                 .country((String) objects[4])
@@ -115,7 +115,7 @@ public class QueryConverter {
 
     public TestVisitDTO testVisitDTOToTestVisitDAO (TestVisitDAO objects){
         return TestVisitDTO.builder()
-                .code(objects.getCode())
+                .code(String.valueOf(objects.getCode()))
                 .direction(objects.getDirection())
                 .city(objects.getCity())
                 .country(objects.getCountry())
