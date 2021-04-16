@@ -30,9 +30,9 @@ public class TestVisitDAO implements Serializable {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "code", length = 100, unique = true, nullable = false)
+    @Column(name = "code")
     @Basic(optional = false)
-    private String code;
+    private Integer code;
 
     @Column(name = "direction", length = 100, nullable = false)
     @Basic(optional = false)

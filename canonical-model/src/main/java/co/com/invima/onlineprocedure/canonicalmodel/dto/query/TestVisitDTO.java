@@ -16,7 +16,7 @@ import java.util.Date;
 public class TestVisitDTO implements Serializable {
 
     private Integer id;
-    private String code;
+    private Integer code;
     private String direction;
     private String city;
     private String country;

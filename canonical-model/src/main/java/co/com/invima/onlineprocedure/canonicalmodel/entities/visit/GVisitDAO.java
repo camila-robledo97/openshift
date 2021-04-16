@@ -29,8 +29,8 @@ public class GVisitDAO  implements Serializable {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "code", length = 100, unique = true, nullable = false)
-    private String code;
+    @Column(name = "code")
+    private Integer code;
 
     @Column(name = "prioridad")
     private String prioridad;

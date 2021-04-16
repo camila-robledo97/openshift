@@ -17,7 +17,7 @@ import java.util.Date;
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GVisitDTO implements Serializable {
-    private String code;
+    private Integer code;
 
     private String prioridad;
 
