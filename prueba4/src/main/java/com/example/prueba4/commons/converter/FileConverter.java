@@ -10,12 +10,13 @@ import java.util.Date;
 public class FileConverter {
     public GVisitDAO GVisitDTOtoGVisitDao(GVisitDTO gVisitDTO)  {
         Date dateActual = new Date();
+        java.sql.Timestamp date2 = new java.sql.Timestamp(dateActual.getTime());
         return GVisitDAO.builder()
                 .code(gVisitDTO.getCode())
-                .prioridad(gVisitDTO.getPrioridad())
                 .estado(gVisitDTO.getEstado())
                 .observaciones(gVisitDTO.getObservaciones())
-                .realDate(dateActual)
+                .prioridad(gVisitDTO.getPrioridad())
+                .realDate(date2)
                 .build();
 
     }
