@@ -115,7 +115,7 @@ public class QueryConverter {
 
     public TestVisitDTO testVisitDTOToTestVisitDAO (TestVisitDAO objects){
         return TestVisitDTO.builder()
-                .code(String.valueOf(objects.getCode()))
+                .code(objects.getCode())
                 .direction(objects.getDirection())
                 .city(objects.getCity())
                 .country(objects.getCountry())

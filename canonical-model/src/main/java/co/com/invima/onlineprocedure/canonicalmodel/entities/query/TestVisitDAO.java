@@ -32,7 +32,7 @@ public class TestVisitDAO implements Serializable {
 
     @Column(name = "code")
     @Basic(optional = false)
-    private Integer code;
+    private String code;
 
     @Column(name = "direction", length = 100, nullable = false)
     @Basic(optional = false)
