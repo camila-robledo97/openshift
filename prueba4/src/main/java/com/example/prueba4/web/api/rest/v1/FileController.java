@@ -2,13 +2,13 @@ package com.example.prueba4.web.api.rest.v1;
 
 import co.com.invima.onlineprocedure.canonicalmodel.dto.generic.GenericRequestDTO;
 import co.com.invima.onlineprocedure.canonicalmodel.dto.generic.GenericResponseDTO;
+import com.example.prueba4.objeto.Union;
 import com.example.prueba4.service.IFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.text.ParseException;
 
 @RestController
 @RequestMapping("dev/v1")
@@ -26,7 +26,7 @@ public class FileController implements IFileController {
 
     @Override
     @GetMapping("/visitas")
-    public ResponseEntity <GenericResponseDTO> findVisit() throws IOException {
+    public Union findVisit() throws IOException {
         return fileService.findVisit();
     }
 
